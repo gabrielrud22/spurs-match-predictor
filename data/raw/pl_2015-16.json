@@ -263,6 +263,10 @@
       "team1": "Watford FC",
       "team2": "West Bromwich Albion",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -344,6 +348,10 @@
       "team1": "Manchester United",
       "team2": "Newcastle United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -459,6 +467,10 @@
       "team1": "Watford FC",
       "team2": "Southampton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -489,6 +501,10 @@
       "team1": "Arsenal FC",
       "team2": "Liverpool FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -621,6 +637,10 @@
       "team1": "Tottenham Hotspur",
       "team2": "Everton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -753,6 +773,10 @@
       "team1": "West Bromwich Albion",
       "team2": "Southampton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -919,6 +943,10 @@
       "team1": "Swansea City",
       "team2": "Everton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1340,6 +1368,10 @@
       "team1": "Tottenham Hotspur",
       "team2": "Liverpool FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1625,6 +1657,10 @@
       "team1": "Manchester United",
       "team2": "Manchester City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1689,6 +1725,10 @@
       "team1": "Crystal Palace",
       "team2": "Manchester United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1719,6 +1759,10 @@
       "team1": "Newcastle United",
       "team2": "Stoke City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1953,6 +1997,10 @@
       "team1": "Aston Villa",
       "team2": "Manchester City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -2323,6 +2371,10 @@
       "team1": "Tottenham Hotspur",
       "team2": "Chelsea FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -2370,6 +2422,10 @@
       "team1": "Manchester United",
       "team2": "West Ham United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -2553,6 +2609,10 @@
       "team1": "West Ham United",
       "team2": "Stoke City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -2787,6 +2847,10 @@
       "team1": "Swansea City",
       "team2": "West Ham United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -2851,6 +2915,10 @@
       "team1": "AFC Bournemouth",
       "team2": "Crystal Palace",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3000,6 +3068,10 @@
       "team1": "Crystal Palace",
       "team2": "Swansea City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3098,6 +3170,10 @@
       "team1": "Manchester United",
       "team2": "Chelsea FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3128,6 +3204,10 @@
       "team1": "Leicester City",
       "team2": "Manchester City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3192,6 +3272,10 @@
       "team1": "Leicester City",
       "team2": "AFC Bournemouth",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3409,6 +3493,10 @@
       "team1": "Manchester City",
       "team2": "Everton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3609,6 +3697,10 @@
       "team1": "Stoke City",
       "team2": "Arsenal FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3758,6 +3850,10 @@
       "team1": "West Bromwich Albion",
       "team2": "Aston Villa",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3822,6 +3918,10 @@
       "team1": "Arsenal FC",
       "team2": "Southampton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3971,6 +4071,10 @@
       "team1": "Watford FC",
       "team2": "Chelsea FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4392,6 +4496,10 @@
       "team1": "Watford FC",
       "team2": "AFC Bournemouth",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4813,6 +4921,10 @@
       "team1": "Norwich City",
       "team2": "Manchester City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5064,6 +5176,10 @@
       "team1": "Sunderland AFC",
       "team2": "West Bromwich Albion",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5383,6 +5499,10 @@
       "team1": "Crystal Palace",
       "team2": "Everton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5736,6 +5856,10 @@
       "team1": "Sunderland AFC",
       "team2": "Arsenal FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5970,6 +6094,10 @@
       "team1": "Aston Villa",
       "team2": "Newcastle United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0

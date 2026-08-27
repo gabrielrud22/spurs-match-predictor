@@ -297,6 +297,10 @@
       "team1": "Leicester City",
       "team2": "Arsenal FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -497,6 +501,10 @@
       "team1": "West Bromwich Albion",
       "team2": "Middlesbrough FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1139,6 +1147,10 @@
       "team1": "Leicester City",
       "team2": "Southampton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1339,6 +1351,10 @@
       "team1": "Liverpool FC",
       "team2": "Manchester United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1352,6 +1368,10 @@
       "team1": "AFC Bournemouth",
       "team2": "Tottenham Hotspur",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1365,6 +1385,10 @@
       "team1": "Arsenal FC",
       "team2": "Middlesbrough FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1429,6 +1453,10 @@
       "team1": "Swansea City",
       "team2": "Watford FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1527,6 +1555,10 @@
       "team1": "Manchester United",
       "team2": "Burnley FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -1880,6 +1912,10 @@
       "team1": "Southampton FC",
       "team2": "Liverpool FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -2658,6 +2694,10 @@
       "team1": "Stoke City",
       "team2": "Southampton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3198,6 +3238,10 @@
       "team1": "Middlesbrough FC",
       "team2": "Leicester City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3449,6 +3493,10 @@
       "team1": "Watford FC",
       "team2": "Middlesbrough FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3751,6 +3799,10 @@
       "team1": "Sunderland AFC",
       "team2": "Tottenham Hotspur",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -3832,6 +3884,10 @@
       "team1": "Manchester United",
       "team2": "Hull City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4066,6 +4122,10 @@
       "team1": "Middlesbrough FC",
       "team2": "Everton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4504,6 +4564,10 @@
       "team1": "Manchester City",
       "team2": "Stoke City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4670,6 +4734,10 @@
       "team1": "Sunderland AFC",
       "team2": "Burnley FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4819,6 +4887,10 @@
       "team1": "Southampton FC",
       "team2": "AFC Bournemouth",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4849,6 +4921,10 @@
       "team1": "Manchester United",
       "team2": "West Bromwich Albion",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -4896,6 +4972,10 @@
       "team1": "Swansea City",
       "team2": "Middlesbrough FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5164,6 +5244,10 @@
       "team1": "Middlesbrough FC",
       "team2": "Burnley FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5415,6 +5499,10 @@
       "team1": "West Ham United",
       "team2": "Everton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5581,6 +5669,10 @@
       "team1": "Manchester City",
       "team2": "Manchester United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5611,6 +5703,10 @@
       "team1": "Stoke City",
       "team2": "West Ham United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5624,6 +5720,10 @@
       "team1": "Southampton FC",
       "team2": "Hull City",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -5892,6 +5992,10 @@
       "team1": "Liverpool FC",
       "team2": "Southampton FC",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0
@@ -6160,6 +6264,10 @@
       "team1": "Southampton FC",
       "team2": "Manchester United",
       "score": {
+        "ht": [
+          0,
+          0
+        ],
         "ft": [
           0,
           0

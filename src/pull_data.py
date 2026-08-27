@@ -13,7 +13,7 @@ for filepath in glob.glob("data/raw/*.json"):
         team1 = match.get("team1", "")
         team2 = match.get("team2", "")
 
-        if "Tottenham Hotspur" in (team1, team2):
+        if any("Tottenham Hotspur" in team for team in (team1, team2)):
             ft = match.get("score", {}).get("ft", [None, None])
             records.append({
                 "season": season,
