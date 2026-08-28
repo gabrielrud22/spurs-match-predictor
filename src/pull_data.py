@@ -19,8 +19,8 @@ for filepath in glob.glob("data/raw/*.json"):
                 "season": season,
                 "round": match.get("round"),
                 "date": match.get("date"),
-                "team1": team1,
-                "team2": team2,
+                "home_team": team1,
+                "away_team": team2,
                 "score_home": ft[0],
                 "score_away": ft[1],
             })
