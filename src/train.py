@@ -1,3 +1,31 @@
+"""
+┌─────────────────────────────────────────────────────────────────────┐
+│  CHECKLIST — update before running this script for a new experiment │
+└─────────────────────────────────────────────────────────────────────┘
+
+  RUN_NUMBER / RUN_NAME
+      Used for both the mlflow run name and the confusion matrix filename
+      (conf_matrix/confusion_matrix_fold_1_run{RUN_NUMBER}_{RUN_NAME}.png).
+      Bump RUN_NUMBER and give RUN_NAME a new, accurate description every
+      run (and add an entry to training_diary.md under the same run number),
+      or it'll overwrite the previous run's confusion matrix file and the
+      names will end up describing the wrong model.
+
+  model / fold_model
+      Built separately (fold_model is a duplicate used just for the single
+      held-out fold check) — if you change the model type or its params,
+      change both, not just one.
+
+  mlflow.log_param(...) calls
+      Keep these matching whatever model/params you're actually using
+      (feature_set, model_type, class_weight, etc.) — a stale logged param
+      is misleading later when comparing runs in MLflow.
+
+  FEATURE_COLUMNS
+      Update if switching to a different feature set (e.g. Set B), and
+      update the "feature_set" param to match.
+"""
+
 import pandas as pd
 import mlflow
 import mlflow.sklearn
@@ -23,6 +51,7 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
+RUN_NUMBER = 4
 RUN_NAME = "rolling_form_randomforest_set_A_balanced_class_weight"
 
 with mlflow.start_run(run_name=RUN_NAME):
@@ -76,7 +105,7 @@ with mlflow.start_run(run_name=RUN_NAME):
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
     disp.plot()
     plt.title("Confusion matrix (fold 1)")
-    cm_path = f"conf_matrix/confusion_matrix_fold_1_{RUN_NAME}.png"
+    cm_path = f"conf_matrix/confusion_matrix_fold_1_run{RUN_NUMBER}_{RUN_NAME}.png"
     plt.savefig(cm_path)
     plt.close()
 
