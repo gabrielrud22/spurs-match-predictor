@@ -7,6 +7,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
+from sklearn.ensemble import RandomForestClassifier
 
 df = pd.read_csv("data/processed/spurs_matches_model_ready.csv")
 
@@ -22,14 +23,19 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-with mlflow.start_run(run_name="rolling_form_logreg_set_A_feature_scaled"):
+RUN_NAME = "rolling_form_randomforest_set_A_balanced_class_weight"
+
+with mlflow.start_run(run_name=RUN_NAME):
     mlflow.log_param("feature_set", "A_rolling_form")
-    mlflow.log_param("model_type", "logistic_regression")
+    mlflow.log_param("model_type", "random_forest")
     mlflow.log_param("cv_folds", 5)
     mlflow.log_param("class_weight", "balanced")
-    mlflow.log_param("scaler", "StandardScaler")
+    mlflow.log_param("n_estimators", 100)
+    mlflow.log_param("random_state", 42)
+    # mlflow.log_param("scaler", "StandardScaler")
 
-    model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    model = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=42)
+    #model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     folds = (StratifiedKFold(n_splits=5, shuffle=True, random_state=42))
 
     # cross_validate handles the train/test split and scoring per fold for us
@@ -55,7 +61,8 @@ with mlflow.start_run(run_name="rolling_form_logreg_set_A_feature_scaled"):
     X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-    fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    fold_model = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=42)
+    #fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     fold_model.fit(X_train, y_train)
     fold_preds = fold_model.predict(X_test)
 
@@ -69,7 +76,8 @@ with mlflow.start_run(run_name="rolling_form_logreg_set_A_feature_scaled"):
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
     disp.plot()
     plt.title("Confusion matrix (fold 1)")
-    plt.savefig("conf_matrix/confusion_matrix_fold_1_balanced.png")
+    cm_path = f"conf_matrix/confusion_matrix_fold_1_{RUN_NAME}.png"
+    plt.savefig(cm_path)
     plt.close()
 
-    mlflow.log_artifact("conf_matrix/confusion_matrix_fold_1_balanced.png")
+    mlflow.log_artifact(cm_path)
