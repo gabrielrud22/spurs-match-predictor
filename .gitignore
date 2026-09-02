@@ -224,3 +224,4 @@ todo_list.md
 templates/
 mlruns/
 mlflow.db
+plots/
