@@ -37,9 +37,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.ensemble import RandomForestClassifier
 
-df = pd.read_csv("data/processed/spurs_matches_model_ready.csv")
+df = pd.read_csv("data/processed/spurs_matches_feature_set_b.csv")
 
-FEATURE_COLUMNS = ["rolling_points_5", "rolling_goals_scored_5", "rolling_goals_conceded_5", "rolling_goal_diff_5"]
+FEATURE_COLUMNS = ["rolling_points_5", "rolling_goals_scored_5", "rolling_goals_conceded_5", "rolling_goal_diff_5", "h2h_win_rate", "h2h_goal_diff", "h2h_prior_matches_played"]
 TARGET_COLUMN = "result"
 
 X = df[FEATURE_COLUMNS]
@@ -51,19 +51,19 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-RUN_NUMBER = 4
-RUN_NAME = "rolling_form_randomforest_set_A_balanced_class_weight"
+RUN_NUMBER = 5
+RUN_NAME = "set_B_logreg_base"
 
 with mlflow.start_run(run_name=RUN_NAME):
-    mlflow.log_param("feature_set", "A_rolling_form")
-    mlflow.log_param("model_type", "random_forest")
+    mlflow.log_param("feature_set", "B_rolling+h2h")
+    mlflow.log_param("model_type", "logistic_regression")
     mlflow.log_param("cv_folds", 5)
-    mlflow.log_param("class_weight", "balanced")
-    mlflow.log_param("n_estimators", 100)
     mlflow.log_param("random_state", 42)
+    # mlflow.log_param("class_weight", "balanced")
+    # mlflow.log_param("n_estimators", 100)
     # mlflow.log_param("scaler", "StandardScaler")
 
-    model = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=42)
+    model = LogisticRegression(max_iter=1000)
     #model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     folds = (StratifiedKFold(n_splits=5, shuffle=True, random_state=42))
 
@@ -90,7 +90,7 @@ with mlflow.start_run(run_name=RUN_NAME):
     X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-    fold_model = RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=42)
+    fold_model = LogisticRegression(max_iter=1000)
     #fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     fold_model.fit(X_train, y_train)
     fold_preds = fold_model.predict(X_test)
