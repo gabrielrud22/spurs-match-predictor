@@ -40,7 +40,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.utils.class_weight import compute_sample_weight
 from xgboost import XGBClassifier
 
-df = pd.read_csv("data/processed/spurs_matches_feature_set_c.csv")
+df = pd.read_csv("data/processed/spurs_matches_feature_set_d.csv")
 
 FEATURE_COLUMNS = [
 "rolling_points_5", 
@@ -50,9 +50,8 @@ FEATURE_COLUMNS = [
 "h2h_win_rate", 
 "h2h_goal_diff", 
 "h2h_prior_matches_played",
-"rolling_points_5_matching_venue", 
-"rolling_goals_scored_5_matching_venue", 
-"rolling_goals_conceded_5_matching_venue"]
+"days_since_last_match",
+"is_extended_break",]
 
 TARGET_COLUMN = "result"
 
@@ -71,11 +70,11 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-RUN_NUMBER = 12
-RUN_NAME = "set_C_logreg_base"
+RUN_NUMBER = 14
+RUN_NAME = "set_D_logreg_base"
 
 with mlflow.start_run(run_name=RUN_NAME):
-    mlflow.log_param("feature_set", "C_rolling+h2h+venue")
+    mlflow.log_param("feature_set", "D_rolling+h2h+rest_days")
     mlflow.log_param("model_type", "logistic_regression")
     mlflow.log_param("cv_folds", 5)
     mlflow.log_param("random_state", 42)
