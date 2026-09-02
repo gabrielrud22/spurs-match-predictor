@@ -40,9 +40,20 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.utils.class_weight import compute_sample_weight
 from xgboost import XGBClassifier
 
-df = pd.read_csv("data/processed/spurs_matches_feature_set_b.csv")
+df = pd.read_csv("data/processed/spurs_matches_feature_set_c.csv")
 
-FEATURE_COLUMNS = ["rolling_points_5", "rolling_goals_scored_5", "rolling_goals_conceded_5", "rolling_goal_diff_5", "h2h_win_rate", "h2h_goal_diff", "h2h_prior_matches_played"]
+FEATURE_COLUMNS = [
+"rolling_points_5", 
+"rolling_goals_scored_5", 
+"rolling_goals_conceded_5", 
+"rolling_goal_diff_5", 
+"h2h_win_rate", 
+"h2h_goal_diff", 
+"h2h_prior_matches_played",
+"rolling_points_5_matching_venue", 
+"rolling_goals_scored_5_matching_venue", 
+"rolling_goals_conceded_5_matching_venue"]
+
 TARGET_COLUMN = "result"
 
 X = df[FEATURE_COLUMNS]
@@ -60,34 +71,36 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-RUN_NUMBER = 11
-RUN_NAME = "set_B_xgboost_balanced"
+RUN_NUMBER = 12
+RUN_NAME = "set_C_logreg_base"
 
 with mlflow.start_run(run_name=RUN_NAME):
-    mlflow.log_param("feature_set", "B_rolling+h2h")
-    mlflow.log_param("model_type", "xgboost")
+    mlflow.log_param("feature_set", "C_rolling+h2h+venue")
+    mlflow.log_param("model_type", "logistic_regression")
     mlflow.log_param("cv_folds", 5)
     mlflow.log_param("random_state", 42)
-    mlflow.log_param("class_weight", "balanced")
+    # mlflow.log_param("class_weight", "balanced")
 
     """not used for random forest; determines how many iterations to run for logreg"""
     # mlflow.log_param("scaler", "StandardScaler")
     
     """not used for logreg; determines how many trees in the forest for random forest or xgboost"""
-    mlflow.log_param("n_estimators", 100)
+    # mlflow.log_param("n_estimators", 100)
 
     """XGBoost"""
-    model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="mlogloss")
+    # model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="mlogloss")
     """Random Forest"""
     #model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
     """Logistic Regression"""
-    #model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    model = LogisticRegression(max_iter=1000)
+    # model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
 
     folds = (StratifiedKFold(n_splits=5, shuffle=True, random_state=42))
 
     # cross_validate handles the train/test split and scoring per fold for us
-    # scores = cross_validate(model, X, y, cv=folds, scoring=["accuracy", "f1_macro"])
-    scores = cross_validate(model, X, y_encoded, cv=folds, scoring=["accuracy", "f1_macro"], params={"sample_weight": sample_weights})
+    scores = cross_validate(model, X, y, cv=folds, scoring=["accuracy", "f1_macro"])
+    """XGBoost"""
+    # scores = cross_validate(model, X, y_encoded, cv=folds, scoring=["accuracy", "f1_macro"], params={"sample_weight": sample_weights})
 
     mean_accuracy = scores["test_accuracy"].mean()
     mean_f1 = scores["test_f1_macro"].mean()
@@ -97,38 +110,40 @@ with mlflow.start_run(run_name=RUN_NAME):
     mlflow.log_metric("mean_cv_f1_macro", mean_f1)
 
     # log a final model trained on ALL data for the artifact itself
-    model.fit(X, y_encoded, sample_weight=sample_weights)
-    mlflow.xgboost.log_model(model, "model")
-    # model.fit(X, y)
-    # mlflow.sklearn.log_model(model, "model")
+    model.fit(X, y)
+    mlflow.sklearn.log_model(model, "model")
+    """XGBoost"""
+    # model.fit(X, y_encoded, sample_weight=sample_weights)
+    # mlflow.xgboost.log_model(model, "model")
 
     print(f"Mean CV accuracy: {mean_accuracy:.3f}")
     print(f"Mean CV F1 (macro): {mean_f1:.3f}")
 
     # confusion matrix for just the first fold, to check the low F1 isn't the model
     # collapsing to predicting "win" every time
-    # train_idx, test_idx = next(folds.split(X, y))
-    # X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-    # y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-
-    train_idx, test_idx = next(folds.split(X, y_encoded))
+    train_idx, test_idx = next(folds.split(X, y))
     X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-    y_train_encoded, y_test_encoded = y_encoded[train_idx], y_encoded[test_idx]
-    y_test = y.iloc[test_idx]
+    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
     """XGBoost"""
-    fold_model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="mlogloss")
-    train_sample_weights = compute_sample_weight(class_weight="balanced", y=y_train_encoded)
-    fold_model.fit(X_train, y_train_encoded, sample_weight=train_sample_weights)
-    fold_preds_encoded = fold_model.predict(X_test)
-    fold_preds = label_encoder.inverse_transform(fold_preds_encoded)
+    # train_idx, test_idx = next(folds.split(X, y_encoded))
+    # X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+    # y_train_encoded, y_test_encoded = y_encoded[train_idx], y_encoded[test_idx]
+    # y_test = y.iloc[test_idx]
+
+    # fold_model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="mlogloss")
+    # train_sample_weights = compute_sample_weight(class_weight="balanced", y=y_train_encoded)
+    # fold_model.fit(X_train, y_train_encoded, sample_weight=train_sample_weights)
+    # fold_preds_encoded = fold_model.predict(X_test)
+    # fold_preds = label_encoder.inverse_transform(fold_preds_encoded)
 
     """RandomForest"""
     # fold_model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
     """LogReg"""
-    #fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
-    # fold_model.fit(X_train, y_train)
-    # fold_preds = fold_model.predict(X_test)
+    fold_model = LogisticRegression(max_iter=1000)
+    # fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    fold_model.fit(X_train, y_train)
+    fold_preds = fold_model.predict(X_test)
 
     labels = ["win", "draw", "loss"]
     cm = confusion_matrix(y_test, fold_preds, labels=labels)
