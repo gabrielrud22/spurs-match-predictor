@@ -37,6 +37,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.pipeline import make_pipeline
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.utils.class_weight import compute_sample_weight
 from xgboost import XGBClassifier
 
 df = pd.read_csv("data/processed/spurs_matches_feature_set_b.csv")
@@ -49,6 +50,8 @@ y = df[TARGET_COLUMN]
 
 label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(y)
+sample_weights = compute_sample_weight(class_weight="balanced", y=y_encoded)
+print(sample_weights[:10])
 print(f"Label encoding: {dict(zip(label_encoder.classes_, label_encoder.transform(label_encoder.classes_)))}")
 
 # the highest proportion here is the accuracy you'd get by always predicting the majority class
@@ -57,15 +60,15 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-RUN_NUMBER = 10
-RUN_NAME = "set_B_xgboost_base"
+RUN_NUMBER = 11
+RUN_NAME = "set_B_xgboost_balanced"
 
 with mlflow.start_run(run_name=RUN_NAME):
     mlflow.log_param("feature_set", "B_rolling+h2h")
     mlflow.log_param("model_type", "xgboost")
     mlflow.log_param("cv_folds", 5)
     mlflow.log_param("random_state", 42)
-    # mlflow.log_param("class_weight", "balanced")
+    mlflow.log_param("class_weight", "balanced")
 
     """not used for random forest; determines how many iterations to run for logreg"""
     # mlflow.log_param("scaler", "StandardScaler")
@@ -84,7 +87,7 @@ with mlflow.start_run(run_name=RUN_NAME):
 
     # cross_validate handles the train/test split and scoring per fold for us
     # scores = cross_validate(model, X, y, cv=folds, scoring=["accuracy", "f1_macro"])
-    scores = cross_validate(model, X, y_encoded, cv=folds, scoring=["accuracy", "f1_macro"])
+    scores = cross_validate(model, X, y_encoded, cv=folds, scoring=["accuracy", "f1_macro"], params={"sample_weight": sample_weights})
 
     mean_accuracy = scores["test_accuracy"].mean()
     mean_f1 = scores["test_f1_macro"].mean()
@@ -94,7 +97,7 @@ with mlflow.start_run(run_name=RUN_NAME):
     mlflow.log_metric("mean_cv_f1_macro", mean_f1)
 
     # log a final model trained on ALL data for the artifact itself
-    model.fit(X, y_encoded)
+    model.fit(X, y_encoded, sample_weight=sample_weights)
     mlflow.xgboost.log_model(model, "model")
     # model.fit(X, y)
     # mlflow.sklearn.log_model(model, "model")
@@ -115,7 +118,8 @@ with mlflow.start_run(run_name=RUN_NAME):
 
     """XGBoost"""
     fold_model = XGBClassifier(n_estimators=100, random_state=42, eval_metric="mlogloss")
-    fold_model.fit(X_train, y_train_encoded)
+    train_sample_weights = compute_sample_weight(class_weight="balanced", y=y_train_encoded)
+    fold_model.fit(X_train, y_train_encoded, sample_weight=train_sample_weights)
     fold_preds_encoded = fold_model.predict(X_test)
     fold_preds = label_encoder.inverse_transform(fold_preds_encoded)
 

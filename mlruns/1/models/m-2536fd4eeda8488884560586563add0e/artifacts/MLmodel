@@ -1,0 +1,22 @@
+artifact_path: file:C:/Users/GabrielRudowski/training/spurs-match-predictor/mlruns/1/models/m-2536fd4eeda8488884560586563add0e/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.13.13
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.4.1
+mlflow_version: 3.15.2
+model_id: m-2536fd4eeda8488884560586563add0e
+model_size_bytes: 609896
+model_uuid: m-2536fd4eeda8488884560586563add0e
+prompts: null
+run_id: 5bc8f3d98ca349b6a6a60678eb80527c
+utc_time_created: '2026-09-02 11:30:56.161935'
