@@ -51,19 +51,19 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-RUN_NUMBER = 7
-RUN_NAME = "set_B_logreg_balanced_scaled"
+RUN_NUMBER = 8
+RUN_NAME = "set_B_random_forest_base"
 
 with mlflow.start_run(run_name=RUN_NAME):
     mlflow.log_param("feature_set", "B_rolling+h2h")
-    mlflow.log_param("model_type", "logistic_regression")
+    mlflow.log_param("model_type", "random_forest")
     mlflow.log_param("cv_folds", 5)
     mlflow.log_param("random_state", 42)
-    mlflow.log_param("class_weight", "balanced")
-    # mlflow.log_param("n_estimators", 100)
-    mlflow.log_param("scaler", "StandardScaler")
+    # mlflow.log_param("class_weight", "balanced")
+    mlflow.log_param("n_estimators", 100)
+    # mlflow.log_param("scaler", "StandardScaler")
 
-    model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
     #model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     folds = (StratifiedKFold(n_splits=5, shuffle=True, random_state=42))
 
@@ -90,7 +90,7 @@ with mlflow.start_run(run_name=RUN_NAME):
     X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
     y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-    fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    fold_model = RandomForestClassifier(n_estimators=100, random_state=42)
     #fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     fold_model.fit(X_train, y_train)
     fold_preds = fold_model.predict(X_test)
