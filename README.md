@@ -1,5 +1,16 @@
 # spurs-match-predictor
 
+## TODO: README updates needed
+
+- [ ] `main.py` deleted (unused `uv init` placeholder) — remove it from the project structure diagram if it's still listed elsewhere, and confirm `pyproject.toml` doesn't reference it as an entry point.
+- [ ] Status checklist is stale: feature engineering and model training are implemented and have real runs behind them (11 MLflow runs across Set A/B, logreg/random forest/XGBoost) — update those two checkboxes and describe what's actually done vs. still pending (API, containerization, CI are still genuinely empty scaffolding).
+- [ ] Project structure section lists `src/features.py` (doesn't exist) — replace with the real pipeline: `build_features.py`, `build_rolling_features.py`, `build_h2h_features.py`, `build_feature_set_b.py`, `build_feature_set_c.py`, `train.py`.
+- [ ] Explain the feature-set naming scheme (A/B/C) — what each one adds (rolling form / +h2h / +venue split) and which processed CSV corresponds to which.
+- [ ] Usage section only documents `pull_data.py` — add run instructions for the rest of the pipeline (`build_features.py` → `build_rolling_features.py`/`build_h2h_features.py` → `build_feature_set_b.py`/`build_feature_set_c.py` → `train.py`), including that they must run in order since each reads the previous stage's output.
+- [ ] Document how to inspect training runs (`mlflow ui`, which backing store/db it uses) since `train.py` now logs real experiments.
+- [ ] Decide and document whether `mlruns/` and `mlflow.db` are meant to be committed to git — flag this as an open question rather than silently updating, since it changes repo conventions.
+- [ ] `impute_ht_helper.py` is described as a "one-off helper" already run — note that it mutates `data/raw/*.json` in place, so it should not be re-run casually.
+
 A project to predict the outcome of Spurs (Tottenham Hotspur) matches based on historical Premier League match results.
 
 ## Status
