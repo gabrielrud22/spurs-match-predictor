@@ -70,18 +70,18 @@ print(df["result"].value_counts(normalize=True))
 
 mlflow.set_experiment("spurs-match-predictor")
 
-RUN_NUMBER = 14
-RUN_NAME = "set_D_logreg_base"
+RUN_NUMBER = 15
+RUN_NAME = "set_D_logreg_balanced_scaled"
 
 with mlflow.start_run(run_name=RUN_NAME):
     mlflow.log_param("feature_set", "D_rolling+h2h+rest_days")
     mlflow.log_param("model_type", "logistic_regression")
     mlflow.log_param("cv_folds", 5)
     mlflow.log_param("random_state", 42)
-    # mlflow.log_param("class_weight", "balanced")
+    mlflow.log_param("class_weight", "balanced")
 
     """not used for random forest; determines how many iterations to run for logreg"""
-    # mlflow.log_param("scaler", "StandardScaler")
+    mlflow.log_param("scaler", "StandardScaler")
     
     """not used for logreg; determines how many trees in the forest for random forest or xgboost"""
     # mlflow.log_param("n_estimators", 100)
@@ -91,8 +91,8 @@ with mlflow.start_run(run_name=RUN_NAME):
     """Random Forest"""
     #model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
     """Logistic Regression"""
-    model = LogisticRegression(max_iter=1000)
-    # model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    # model = LogisticRegression(max_iter=1000)
+    model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
 
     folds = (StratifiedKFold(n_splits=5, shuffle=True, random_state=42))
 
@@ -139,8 +139,8 @@ with mlflow.start_run(run_name=RUN_NAME):
     """RandomForest"""
     # fold_model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
     """LogReg"""
-    fold_model = LogisticRegression(max_iter=1000)
-    # fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
+    # fold_model = LogisticRegression(max_iter=1000)
+    fold_model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, class_weight="balanced"))
     fold_model.fit(X_train, y_train)
     fold_preds = fold_model.predict(X_test)
 
