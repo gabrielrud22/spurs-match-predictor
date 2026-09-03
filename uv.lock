@@ -1971,19 +1971,25 @@ name = "spurs-match-predictor"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "fastapi" },
     { name = "matplotlib" },
     { name = "mlflow" },
     { name = "pandas" },
+    { name = "pydantic" },
     { name = "scikit-learn" },
+    { name = "uvicorn" },
     { name = "xgboost" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "fastapi", specifier = ">=0.141.1" },
     { name = "matplotlib", specifier = ">=3.11.1" },
     { name = "mlflow", specifier = ">=2.14" },
     { name = "pandas", specifier = ">=2.0.5,<3" },
+    { name = "pydantic", specifier = ">=2.13.5" },
     { name = "scikit-learn", specifier = ">=1.9.0" },
+    { name = "uvicorn", specifier = ">=0.52.4" },
     { name = "xgboost", specifier = ">=3.4.1" },
 ]
 
