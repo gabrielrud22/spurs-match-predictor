@@ -21,8 +21,9 @@ jobs:
       - name: Smoke test - API starts and responds
         run: |
           uv run uvicorn api.main:app --host 0.0.0.0 --port 8000 &
-          sleep 5
-          curl --fail http://localhost:8000/health
+          sleep 10
+          curl --fail --retry 5 --retry-delay 2 --retry-connrefused http://localhost:8000/health 
+#sleep 10 gives more buffer time, retry = retry after failure rather than quit after one attempt
 
       - name: Build Docker image
         run: docker build -t spurs-match-predictor .
