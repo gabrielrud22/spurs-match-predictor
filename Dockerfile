@@ -10,9 +10,6 @@ RUN uv sync --frozen
 COPY api/ ./api/
 COPY data/processed/ ./data/processed/
 COPY mlruns/ ./mlruns/
-COPY mlflow.db ./mlflow.db
-
-ENV MLFLOW_TRACKING_URI=sqlite:///mlflow.db
 
 EXPOSE 8000
 
