@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spurs-match-predictor-service
+spec:
+  selector: #must match the labels of deployment.yaml's pod template metadata.labels
+    app: spurs-match-predictor
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000

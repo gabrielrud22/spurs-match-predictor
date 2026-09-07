@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spurs-match-predictor
+spec:
+  replicas: 1 #means that just one copy is running
+  selector:
+    matchLabels:
+      app: spurs-match-predictor #this must match template.metadata.labels
+  template:
+    metadata:
+      labels:
+        app: spurs-match-predictor #this must match selector.matchLabels
+    spec:
+      containers:
+        - name: spurs-match-predictor
+          image: gabrielrud/spurs-match-predictor:latest #replace placeholder value with DockerHub username and image name
+          ports:
+            - containerPort: 8000
+          readinessProbe: #is this pod ready to receive traffic? If not, it will be removed from the service load balancer
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe: #has this pod gotten stuck or broken? If so, Kubernetes kills and restarts the pod.
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
