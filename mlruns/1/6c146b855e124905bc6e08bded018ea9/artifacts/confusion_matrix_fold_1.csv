@@ -1,0 +1,4 @@
+,predicted_win,predicted_draw,predicted_loss
+actual_win,60,0,0
+actual_draw,25,0,0
+actual_loss,36,0,0

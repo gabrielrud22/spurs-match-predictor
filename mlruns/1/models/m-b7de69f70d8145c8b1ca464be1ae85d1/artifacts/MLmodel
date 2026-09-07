@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/GabrielRudowski/training/spurs-match-predictor/mlruns/1/models/m-b7de69f70d8145c8b1ca464be1ae85d1/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.13.13
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
+mlflow_version: 3.15.2
+model_id: m-b7de69f70d8145c8b1ca464be1ae85d1
+model_size_bytes: 29073
+model_uuid: m-b7de69f70d8145c8b1ca464be1ae85d1
+prompts: null
+run_id: 39b9264b4283498c8fcce0eacb4a876c
+utc_time_created: '2026-09-02 10:36:47.981023'
