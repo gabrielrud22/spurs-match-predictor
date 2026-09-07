@@ -1,0 +1,6 @@
+.venv
+conf_matrix/
+__pycache__/
+*.pyc
+.git
+data/raw/

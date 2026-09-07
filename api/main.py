@@ -6,7 +6,9 @@ import mlflow.sklearn #imports the MLflow module for loading trained model from 
 app = FastAPI() #creates the application instance that uvicorn actually runs
 
 # loads the registered CHAMPION model; line runs once when the module is first imported
-model = mlflow.sklearn.load_model("models:/spurs-match-predictor@champion")
+# model = mlflow.sklearn.load_model("models:/spurs-match-predictor@champion")
+model = mlflow.sklearn.load_model("mlruns/1/models/m-df7fdda84f314f29a4a9ca66d6763ea3/artifacts")
+#loads the trained model directly from its MLflow artifact folder
 
 #also runs once at start, loads raw match history, converts into proper datetime type, and sorts chronologically
 history = pd.read_csv("data/processed/spurs_matches_features.csv")
