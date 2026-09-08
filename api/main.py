@@ -93,3 +93,8 @@ def predict(fixture: FixtureRequest):
         # "venue": fixture.venue,
         "probabilities": ordered_probabilities
     }
+
+# in api/main.py
+@app.get("/opponents")
+def get_opponents():
+    return {"opponents": sorted(KNOWN_OPPONENTS)}

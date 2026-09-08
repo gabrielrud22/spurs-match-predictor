@@ -10,7 +10,9 @@ dependencies = [
     "mlflow>=2.14",
     "pandas>=2.0.5,<3",
     "pydantic>=2.13.5",
+    "requests>=2.34.2",
     "scikit-learn>=1.9.0",
+    "streamlit>=1.63.0",
     "uvicorn>=0.52.4",
     "xgboost>=3.4.1",
 ]
